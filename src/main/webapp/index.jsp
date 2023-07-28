@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- 이걸 써야 jsp코드?를 사용할 수 있음 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>무한 멤버 웹</title>
+</head>
+<body>
+	<h1>무한 멤버 웹</h1>
+	<h2>로그인 페이지</h2>
+	<c:if test="${sessionScope.memberId ne null }">  <!-- ne => not equles -->
+		${sessionScope.memberName}님 환영합니다! <br>
+		<input type="button" value="로그아웃"><a href = "/member/logout.do">로그아웃</a>
+		<a href ="/member/myInfor.do?member-id=${memberId }">마이페이지</a>
+	</c:if>
+	
+	<c:if test="${memberId eq null }">
+	<fieldset>
+		<legend>로그인</legend>
+		<form action="/member/login.do" method="post">
+			<input type="text" name="member-id"><br>
+			<input type="password" name="member-pw"><br>
+			<div>
+				<input type="submit" value="로그인">
+				<input type="reset" value="취소">
+				<a href="/member/enroll.jsp">회원가입</a>
+			</div>
+		</form>
+	</fieldset>
+	</c:if>
+</body>
+</html>
